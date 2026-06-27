@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salud Colombia Hoy | Blog SGSSS</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --verde:    #006847;
+    --verde-l:  #E8F5EE;
+    --azul:     #003580;
+    --azul-l:   #E6EEF9;
+    --rojo:     #B30000;
+    --rojo-l:   #FDEAEA;
+    --naranja:  #D4550A;
+    --naranja-l:#FDF0E8;
+    --gris:     #1A1A1A;
+    --gris-m:   #555555;
+    --gris-l:   #F5F5F3;
+    --borde:    #E0E0DC;
+    --blanco:   #FFFFFF;
+    --acento:   #006847;
+    --serif:    'Merriweather', Georgia, serif;
+    --sans:     'Inter', system-ui, sans-serif;
+    --display:  'Space Grotesk', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--gris);
+    background: var(--blanco);
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--verde);
+    color: var(--blanco);
+    padding: 0 24px;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    gap: 16px;
+  }
+  .site-logo {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--blanco);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .site-logo span {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    opacity: 0.8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .header-tag {
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    color: var(--blanco);
+    white-space: nowrap;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #004d34 0%, #003580 100%);
+    color: var(--blanco);
+    padding: 72px 24px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .hero-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: rgba(255,255,255,0.4);
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: #7EDDB5;
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.8);
+    max-width: 580px;
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+  .hero-meta-item svg { opacity: 0.7; }
+
+  /* ── NAV ÍNDICE ── */
+  .nav-indice {
+    background: var(--gris-l);
+    border-bottom: 1px solid var(--borde);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-indice-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav-indice a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--gris-m);
+    text-decoration: none;
+    padding: 14px 18px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-indice a:hover {
+    color: var(--verde);
+    border-bottom-color: var(--verde);
+  }
+
+  /* ── CONTENIDO PRINCIPAL ── */
+  main { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── SECCIONES ── */
+  .seccion {
+    padding: 72px 0 0;
+  }
+  .seccion-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .seccion-eyebrow.verde { color: var(--verde); }
+  .seccion-eyebrow.azul  { color: var(--azul); }
+  .seccion-eyebrow.rojo  { color: var(--rojo); }
+  .seccion-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px; height: 2px;
+    background: currentColor;
+  }
+
+  .seccion h2 {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--gris);
+    margin-bottom: 20px;
+  }
+  .seccion-intro {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #333;
+    margin-bottom: 36px;
+    border-left: 3px solid var(--acento);
+    padding-left: 20px;
+  }
+  .seccion p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #2a2a2a;
+    margin-bottom: 20px;
+  }
+
+  /* ── DIVISOR ── */
+  .divisor {
+    border: none;
+    border-top: 1px solid var(--borde);
+    margin: 64px 0 0;
+  }
+
+  /* ── CUADRO DE CONCEPTOS CLAVE ── */
+  .caja-concepto {
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .caja-concepto.verde { background: var(--verde-l); border-left: 4px solid var(--verde); }
+  .caja-concepto.azul  { background: var(--azul-l);  border-left: 4px solid var(--azul); }
+  .caja-concepto.rojo  { background: var(--rojo-l);  border-left: 4px solid var(--rojo); }
+  .caja-concepto.naranja { background: var(--naranja-l); border-left: 4px solid var(--naranja); }
+  .caja-concepto h3 {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .caja-concepto.verde h3 { color: var(--verde); }
+  .caja-concepto.azul  h3 { color: var(--azul); }
+  .caja-concepto.rojo  h3 { color: var(--rojo); }
+  .caja-concepto.naranja h3 { color: var(--naranja); }
+  .caja-concepto p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 0;
+    color: #222;
+  }
+
+  /* ── TABLA DE COMPARACIÓN ── */
+  .tabla-wrap {
+    overflow-x: auto;
+    margin: 36px 0;
+    border-radius: 12px;
+    border: 1px solid var(--borde);
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  thead tr { background: var(--verde); }
+  thead th {
+    font-family: var(--display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--blanco);
+    padding: 14px 18px;
+    text-align: left;
+  }
+  thead th:first-child { border-radius: 0; }
+  tbody tr:nth-child(odd)  { background: var(--blanco); }
+  tbody tr:nth-child(even) { background: var(--gris-l); }
+  tbody td {
+    padding: 13px 18px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--borde);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .td-cat {
+    font-weight: 600;
+    color: var(--verde);
+    white-space: nowrap;
+    font-size: 0.85rem;
+  }
+  .td-similar {
+    background: #E8F5EE !important;
+    font-size: 0.88rem;
+    color: #1a4a30;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* ── CARDS REGÍMENES ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+  }
+  .card-regimen {
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--borde);
+  }
+  .card-regimen.contributivo { border-top: 4px solid var(--verde); }
+  .card-regimen.subsidiado   { border-top: 4px solid var(--azul); }
+  .card-regimen.especial     { border-top: 4px solid var(--naranja); }
+  .card-regimen h3 {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .card-regimen.contributivo h3 { color: var(--verde); }
+  .card-regimen.subsidiado h3   { color: var(--azul); }
+  .card-regimen.especial h3     { color: var(--naranja); }
+  .card-regimen .cifra {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card-regimen.contributivo .cifra { color: var(--verde); }
+  .card-regimen.subsidiado .cifra   { color: var(--azul); }
+  .card-regimen.especial .cifra     { color: var(--naranja); }
+  .card-regimen .cifra-label {
+    font-size: 0.78rem;
+    color: var(--gris-m);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .card-regimen ul {
+    padding-left: 18px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #333;
+  }
+
+  /* ── LISTA ESTILIZADA ── */
+  .lista-pros, .lista-contras {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .lista-pros li, .lista-contras li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    border-bottom: 1px solid var(--borde);
+  }
+  .lista-pros li:last-child, .lista-contras li:last-child { border-bottom: none; }
+  .lista-pros li::before {
+    content: '✓';
+    position: absolute; left: 0;
+    color: var(--verde);
+    font-weight: 700;
+  }
+  .lista-contras li::before {
+    content: '✗';
+    position: absolute; left: 0;
+    color: var(--rojo);
+    font-weight: 700;
+  }
+
+  /* ── ALERTA / ADVERTENCIA ── */
+  .alerta {
+    background: var(--rojo-l);
+    border: 1px solid #f5c0c0;
+    border-left: 4px solid var(--rojo);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .alerta-titulo {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--rojo);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .alerta p { font-size: 0.95rem; margin-bottom: 8px; color: #2a0000; }
+  .alerta p:last-child { margin-bottom: 0; }
+
+  /* ── CITA ACADÉMICA ── */
+  .cita {
+    border-left: 3px solid var(--borde);
+    padding: 16px 24px;
+    margin: 28px 0;
+    background: var(--gris-l);
+    border-radius: 0 8px 8px 0;
+  }
+  .cita p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 8px;
+  }
+  .cita cite {
+    font-size: 0.78rem;
+    color: var(--gris-m);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── CONCLUSIÓN ── */
+  .conclusion {
+    background: linear-gradient(135deg, #004d34 0%, #003580 100%);
+    color: var(--blanco);
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin: 64px 0 0;
+  }
+  .conclusion h2 {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .conclusion p {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.98rem;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+  .conclusion p:last-child { margin-bottom: 0; }
+
+  /* ── AUTORES ── */
+  .autores {
+    border-top: 1px solid var(--borde);
+    padding: 48px 0 0;
+    margin: 48px 0 0;
+  }
+  .autores-titulo {
+    font-family: var(--display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gris-m);
+    margin-bottom: 20px;
+  }
+  .autores-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .autor-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gris-l);
+    border: 1px solid var(--borde);
+    border-radius: 40px;
+    padding: 8px 16px 8px 8px;
+    font-size: 0.875rem;
+  }
+  .autor-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--verde);
+    color: var(--blanco);
+    font-family: var(--display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .autor-nombre { font-weight: 500; color: var(--gris); }
+  .autor-institucion {
+    font-size: 0.8rem;
+    color: var(--gris-m);
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .autor-institucion::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 2px;
+    background: var(--verde);
+    vertical-align: middle;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gris);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 32px 24px;
+    margin-top: 72px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  footer strong { color: rgba(255,255,255,0.85); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero { padding: 48px 16px 40px; }
+    .seccion { padding: 48px 0 0; }
+    main { padding: 0 16px; }
+    .conclusion { padding: 32px 24px; }
+    .caja-concepto { padding: 20px 20px; }
+    thead th, tbody td { padding: 10px 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#">
+      Salud Colombia Hoy
+      <span>Blog académico · SGSSS</span>
+    </a>
+    <span class="header-tag">Gerencia de la Salud Virtual · FUCS</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Actividad semana 5 · SGSS</p>
+    <h1>El aseguramiento en salud: <em>cómo funciona hoy</em> y qué pasaría sin él</h1>
+    <p class="hero-desc">
+      Un análisis del Sistema General de Seguridad Social en Salud (SGSSS) de Colombia: sus regímenes, sus diferencias, sus logros, y los riesgos de desmontar el aseguramiento en el marco de la reforma 2025–2026.
+    </p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Junio 2026
+      </span>
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Lectura: 10 min
+      </span>
+      <span class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Trabajo grupal
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- NAV ÍNDICE -->
+<nav class="nav-indice" aria-label="Índice del blog">
+  <div class="nav-indice-inner">
+    <a href="#que-es">¿Qué es el SGSSS?</a>
+    <a href="#regimenes">Los regímenes</a>
+    <a href="#diferencias">Diferencias y similitudes</a>
+    <a href="#prestacion">Prestación de servicios</a>
+    <a href="#sin-aseguramiento">Reforma sin aseguramiento</a>
+    <a href="#conclusion">Conclusión</a>
+  </div>
+</nav>
+
+<!-- CONTENIDO -->
+<main>
+
+  <!-- SECCIÓN 1: QUÉ ES EL SGSSS -->
+  <section class="seccion" id="que-es">
+    <p class="seccion-eyebrow verde">Introducción</p>
+    <h2>¿Qué es el Sistema General de Seguridad Social en Salud?</h2>
+    <p class="seccion-intro">
+      Antes de 1993, el acceso a los servicios de salud en Colombia dependía principalmente de la vinculación laboral formal o de la disponibilidad de recursos económicos propios. La expedición de la Ley 100 de ese año introdujo un cambio estructural al crear el <strong>Sistema General de Seguridad Social en Salud (SGSSS)</strong>, fundamentado en los principios de universalidad, solidaridad y eficiencia contemplados en el artículo 48 de la Constitución Política.
+    </p>
+
+    <p>
+      El modelo adoptado se sustenta en el concepto de <strong>aseguramiento</strong>: cada ciudadano cuenta con una entidad gestora —la EPS— que recibe un pago mensual denominado Unidad de Pago por Capitación (UPC) y, a cambio, asume la responsabilidad de coordinar y garantizar la atención en salud de sus afiliados. Los recursos provienen de las cotizaciones de quienes tienen capacidad de pago y de aportes fiscales del Estado para quienes no la tienen, lo que materializa el principio de solidaridad entre regímenes.
+    </p>
+
+    <div class="caja-concepto verde">
+      <h3>El aseguramiento como mecanismo de protección financiera</h3>
+      <p>
+        El aseguramiento cumple una función que va más allá de la gestión administrativa: permite distribuir el riesgo financiero en salud entre millones de personas. Sin este mecanismo, eventos de alto costo como hospitalizaciones prolongadas o tratamientos oncológicos recaerían directamente sobre las familias, con consecuencias económicas frecuentemente devastadoras. La existencia de un asegurador permite que ese riesgo sea compartido y, en teoría, gestionado de manera preventiva.
+      </p>
+    </div>
+
+    <p>
+      Uno de los avances más significativos del sistema ha sido la cobertura. Mientras en 1995 la afiliación alcanzaba apenas el 29% de la población, al cierre de 2024 superaba el 98,56%, según cifras del Ministerio de Salud y Protección Social. Aunque persisten brechas importantes en la calidad y oportunidad de la atención, este crecimiento refleja el efecto acumulado de políticas de aseguramiento sostenidas durante tres décadas.
+    </p>
+  </section>
+
+  <hr class="divisor">
+
+  <!-- SECCIÓN 2: LOS REGÍMENES -->
+  <section class="seccion" id="regimenes">
+    <p class="seccion-eyebrow verde">Estructura del sistema</p>
+    <h2>Los regímenes de afiliación al SGSSS</h2>
+    <p class="seccion-intro">
+      El SGSSS no opera bajo un modelo uniforme. Su estructura contempla tres regímenes de afiliación diferenciados según la capacidad de pago de la población, cada uno con fuentes de financiación y condiciones de acceso particulares.
+    </p>
+
+    <div class="cards-grid">
+      <div class="card-regimen contributivo">
+        <h3>Régimen Contributivo</h3>
+        <div class="cifra">aprox. 23,5M</div>
+        <div class="cifra-label">personas afiliadas · trabajadores y pensionados</div>
+        <ul>
+          <li>Dirigido a trabajadores dependientes e independientes con capacidad de pago, así como a pensionados</li>
+          <li>Cotización equivalente al 12,5% del salario base: el empleador asume el 8,5% y el trabajador el 4%</li>
+          <li>Permite la libre elección de EPS dentro de las entidades autorizadas por la Superintendencia Nacional de Salud</li>
+          <li>Incluye prestaciones económicas: reconocimiento de incapacidades por enfermedad general, licencias de maternidad y paternidad, y cobertura por accidente de trabajo</li>
+        </ul>
+      </div>
+      <div class="card-regimen subsidiado">
+        <h3>Régimen Subsidiado</h3>
+        <div class="cifra">aprox. 25,7M</div>
+        <div class="cifra-label">personas afiliadas · el régimen con mayor cobertura</div>
+        <ul>
+          <li>Destinado a población sin capacidad de pago, clasificada en los grupos A, B y C del SISBÉN</li>
+          <li>Comprende también a población en situación de desplazamiento, comunidades indígenas y menores bajo protección del ICBF</li>
+          <li>Financiado principalmente con recursos del Estado: Sistema General de Participaciones, IVA social y rentas cedidas</li>
+          <li>No contempla reconocimiento de incapacidades ni licencias de maternidad, lo que constituye una inequidad persistente frente al régimen contributivo</li>
+        </ul>
+      </div>
+      <div class="card-regimen especial">
+        <h3>Regímenes Especiales y de Excepción</h3>
+        <div class="cifra">aprox. 2,2M</div>
+        <div class="cifra-label">personas en sectores específicos del Estado</div>
+        <ul>
+          <li>Agrupa a Fuerzas Militares, Policía Nacional, magisterio, Ecopetrol y algunas universidades públicas</li>
+          <li>Cada sector cuenta con entidades propias de atención (SANIDAD, FOMAG, CAPRESOCA, entre otras)</li>
+          <li>Su plan de beneficios suele ser más amplio que el del sistema general</li>
+          <li>No se articula directamente con el régimen contributivo ni el subsidiado</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="caja-concepto azul">
+      <h3>El papel de las EPS en el modelo de aseguramiento</h3>
+      <p>
+        Las Entidades Promotoras de Salud constituyen uno de los principales componentes del modelo. Reciben la UPC, contratan a las Instituciones Prestadoras de Servicios (IPS) y asumen la gestión del riesgo financiero de sus afiliados. En la práctica, sin embargo, su desempeño ha sido heterogéneo: diversas entidades han implementado barreras administrativas que dificultan el acceso oportuno a los servicios. De las 157 EPS autorizadas en los inicios del sistema, actualmente solo 27 permanecen en funcionamiento, lo que da cuenta de los desafíos estructurales que ha enfrentado el modelo a lo largo de su historia.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divisor">
+
+  <!-- SECCIÓN 3: DIFERENCIAS Y SIMILITUDES -->
+  <section class="seccion" id="diferencias">
+    <p class="seccion-eyebrow azul">Análisis comparativo</p>
+    <h2>Diferencias y similitudes entre los regímenes</h2>
+    <p class="seccion-intro">
+      Desde 2012, contributivo y subsidiado comparten el mismo Plan de Beneficios en Salud, lo que eliminó una inequidad histórica en la que los más vulnerables recibían menos servicios garantizados. No obstante, persisten diferencias relevantes en las condiciones de financiación, las prestaciones económicas y los mecanismos de acceso.
+    </p>
+
+    <div class="tabla-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criterio</th>
+            <th>Contributivo</th>
+            <th>Subsidiado</th>
+            <th>Especial / Excepción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-cat">Fuente de financiación</td>
+            <td>Cotizaciones de empleador y trabajador (12,5% del salario base)</td>
+            <td>Recursos fiscales del Estado: SGP, IVA social, rentas cedidas</td>
+            <td>Cotizaciones directas del sector; recursos propios de cada entidad</td>
+          </tr>
+          <tr>
+            <td class="td-cat">Población objetivo</td>
+            <td>Trabajadores dependientes e independientes con capacidad de pago; pensionados</td>
+            <td>Población sin capacidad de pago: SISBÉN A-C, desplazados, comunidades indígenas</td>
+            <td>Sectores específicos del Estado: militares, policías, docentes, trabajadores de Ecopetrol</td>
+          </tr>
+          <tr>
+            <td class="td-cat">Mecanismo de afiliación</td>
+            <td>Libre elección de EPS autorizada; vinculación a través del empleador</td>
+            <td>Selección entre EPS habilitadas en el municipio; puede ser asignada por la entidad territorial</td>
+            <td>Adscripción a entidades específicas de cada sector</td>
+          </tr>
+          <tr>
+            <td class="td-cat">Plan de beneficios</td>
+            <td class="td-similar">✓ PBS unificado para ambos regímenes desde 2012</td>
+            <td class="td-similar">✓ PBS unificado para ambos regímenes desde 2012</td>
+            <td>Plan propio, generalmente más amplio que el PBS general</td>
+          </tr>
+          <tr>
+            <td class="td-cat">Prestaciones económicas</td>
+            <td>Reconocimiento de incapacidades por enfermedad general, licencias de maternidad, paternidad y accidente laboral</td>
+            <td>No contempla reconocimiento de incapacidades ni licencias, lo que genera una brecha de equidad significativa</td>
+            <td>Variable según la reglamentación de cada régimen</td>
+          </tr>
+          <tr>
+            <td class="td-cat">Copagos y cuotas moderadoras</td>
+            <td>Cuotas moderadoras graduadas según nivel de ingreso del afiliado</td>
+            <td>Copagos para población del grupo D; grupos A, B y C exentos en servicios básicos</td>
+            <td>Definidos por la reglamentación interna de cada entidad</td>
+          </tr>
+          <tr>
+            <td class="td-cat">Portabilidad</td>
+            <td class="td-similar">✓ Garantizada en todo el territorio nacional</td>
+            <td class="td-similar">✓ Garantizada en todo el territorio nacional</td>
+            <td>Variable según la cobertura de cada entidad</td>
+          </tr>
+          <tr>
+            <td class="td-cat">Movilidad entre regímenes</td>
+            <td class="td-similar">✓ Posible sin perder continuidad ni cambio de EPS (Decreto 3047 de 2013)</td>
+            <td class="td-similar">✓ Posible sin perder continuidad ni cambio de EPS (Decreto 3047 de 2013)</td>
+            <td>No aplica movilidad hacia el sistema general</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:var(--display);font-size:1.15rem;font-weight:700;margin:32px 0 16px;color:var(--gris);">Elementos comunes a los regímenes contributivo y subsidiado</h3>
+    <ul class="lista-pros">
+      <li><strong>Plan de Beneficios en Salud unificado:</strong> desde 2012, ambos regímenes garantizan el mismo conjunto de servicios, procedimientos y medicamentos, eliminando la diferenciación que históricamente perjudicaba a la población más vulnerable.</li>
+      <li><strong>Carácter obligatorio de la afiliación:</strong> la vinculación al sistema es un deber legal para todos los ciudadanos; el SGSSS no contempla la afiliación voluntaria para la cobertura básica.</li>
+      <li><strong>Atención de urgencias con cobertura nacional:</strong> cualquier afiliado tiene derecho a ser atendido en urgencias en cualquier IPS del país, independientemente del municipio de afiliación.</li>
+      <li><strong>Principio de solidaridad:</strong> los recursos se redistribuyen de los afiliados con mayor capacidad contributiva hacia quienes no pueden aportar, a través de la Administradora de los Recursos del Sistema (ADRES).</li>
+      <li><strong>Supervisión unificada:</strong> la Superintendencia Nacional de Salud ejerce control y vigilancia sobre todas las EPS, sin distinción de régimen.</li>
+    </ul>
+  </section>
+
+  <hr class="divisor">
+
+  <!-- SECCIÓN 4: PRESTACIÓN DE SERVICIOS -->
+  <section class="seccion" id="prestacion">
+    <p class="seccion-eyebrow verde">Funcionamiento del sistema</p>
+    <h2>La prestación de servicios de salud en Colombia</h2>
+    <p class="seccion-intro">
+      La atención en el SGSSS se organiza según niveles de complejidad. El médico general en el primer nivel de atención actúa como puerta de entrada al sistema y referenciador hacia los niveles superiores, con el objetivo de optimizar el uso de los recursos y concentrar la atención especializada en los casos que realmente la requieren.
+    </p>
+
+    <p>
+      En la práctica, sin embargo, este modelo presenta dificultades importantes. Los tiempos de espera para acceder a consulta especializada oscilan entre 15 y 30 días en las áreas urbanas y pueden extenderse considerablemente en zonas rurales o de difícil acceso. Los hospitales públicos acumulan una cartera sin pagar que supera los 10 billones de pesos, lo que compromete su capacidad operativa. A esto se suma que muchas EPS han implementado mecanismos administrativos que, en la práctica, dificultan el acceso a servicios ya cubiertos por el Plan de Beneficios.
+    </p>
+
+    <div class="caja-concepto naranja">
+      <h3>Limitaciones identificadas en la prestación actual</h3>
+      <p>
+        Entre las dificultades más frecuentemente reportadas se encuentran: la demora en la autorización de procedimientos y medicamentos, la fragmentación entre la atención ambulatoria y hospitalaria, la baja disponibilidad de especialistas en territorios apartados, y la insuficiente articulación entre el primer y segundo nivel de atención. Estas barreras afectan de manera desproporcionada a la población afiliada al régimen subsidiado y a quienes residen fuera de los principales centros urbanos.
+      </p>
+    </div>
+
+    <p>
+      La Atención Primaria en Salud continúa siendo el componente menos desarrollado del sistema. A pesar del consenso técnico sobre su efectividad para mejorar los resultados en salud y reducir costos a largo plazo, la mayor parte de los recursos se destina a atención curativa de mediana y alta complejidad. Esta orientación genera un ciclo en el que las enfermedades se atienden en etapas avanzadas, con mayor costo y menor probabilidad de recuperación completa.
+    </p>
+
+    <div class="caja-concepto verde">
+      <h3>El rol de la ADRES en el flujo de recursos</h3>
+      <p>
+        La Administradora de los Recursos del Sistema General de Seguridad Social en Salud (ADRES) centraliza el recaudo, la administración y la distribución de los recursos del SGSSS. Recibe las cotizaciones del régimen contributivo y los aportes fiscales del subsidiado, y los transfiere mensualmente a las EPS en forma de UPC. Su funcionamiento eficiente es determinante para la sostenibilidad financiera del sistema; cualquier propuesta de reforma que modifique el modelo de aseguramiento implica necesariamente redefinir las funciones y capacidades operativas de esta entidad.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divisor">
+
+  <!-- SECCIÓN 5: REFORMA SIN ASEGURAMIENTO -->
+  <section class="seccion" id="sin-aseguramiento">
+    <p class="seccion-eyebrow rojo">Debate de política pública</p>
+    <h2>Alcances e implicaciones de una reforma sin aseguramiento tradicional</h2>
+    <p class="seccion-intro">
+      La propuesta de reforma a la salud del Gobierno nacional —detenida en la Comisión Séptima del Senado a diciembre de 2025— plantea modificaciones estructurales al modelo de aseguramiento vigente. A continuación se analizan sus alcances y las principales implicaciones identificadas por la literatura técnica y los actores del sector.
+    </p>
+
+    <div class="caja-concepto azul">
+      <h3>Elementos centrales del Proyecto de Ley 312 de 2024</h3>
+      <p>
+        El proyecto propone transformar las EPS en "Gestoras de Salud y Vida", entidades con funciones administrativas reducidas (coordinación de citas, distribución de medicamentos y seguimiento de usuarios), sin manejo directo de los recursos del sistema. La ADRES asumiría el rol de pagador único, girando directamente a las IPS. La afiliación pasaría a ser territorial —determinada por el municipio de residencia—, eliminando la libre elección de aseguradora, y se crearían Centros de Atención Primaria en Salud (CAPS) con adscripción poblacional.
+      </p>
+    </div>
+
+    <h3 style="font-family:var(--display);font-size:1.15rem;font-weight:700;margin:32px 0 16px;color:var(--gris);">Ventajas potenciales identificadas</h3>
+    <ul class="lista-pros">
+      <li><strong>Reducción de la intermediación financiera:</strong> al eliminar el manejo de recursos por parte de entidades privadas, se reducirían los costos administrativos y el riesgo de desvío de fondos hacia actividades distintas a la atención en salud.</li>
+      <li><strong>Fortalecimiento de la atención primaria:</strong> la creación de los CAPS con adscripción poblacional busca acercar los servicios preventivos a las comunidades, particularmente en territorios con menor oferta de servicios.</li>
+      <li><strong>Mayor equidad territorial:</strong> el modelo territorial podría redistribuir recursos hacia zonas históricamente desatendidas, cuya baja cobertura actual está relacionada con la escasa capacidad contributiva de sus habitantes.</li>
+      <li><strong>Disminución del riesgo de apropiación indebida de recursos:</strong> al no gestionar directamente los recursos, las nuevas gestoras tendrían menor exposición a prácticas irregulares en el manejo de fondos públicos.</li>
+    </ul>
+
+    <h3 style="font-family:var(--display);font-size:1.15rem;font-weight:700;margin:32px 0 16px;color:var(--gris);">Riesgos e implicaciones críticas identificadas</h3>
+    <ul class="lista-contras">
+      <li><strong>Capacidad operativa insuficiente de la ADRES:</strong> asumir el pago directo a miles de IPS en todo el país requiere una infraestructura de sistemas de información y control que actualmente no se evidencia de manera suficiente en la entidad, lo que representa un riesgo importante en la transición.</li>
+      <li><strong>Pérdida de la función de gestión del riesgo en salud:</strong> las EPS acumulan información agregada sobre sus afiliados que permite anticipar necesidades, diseñar intervenciones preventivas y controlar el gasto en atenciones de alto costo. La propuesta no define con claridad qué entidad asumiría esta función.</li>
+      <li><strong>Implicaciones laborales significativas:</strong> la liquidación de las EPS tendría un impacto considerable sobre el empleo en el sector administrativo de salud, lo que requeriría medidas específicas de transición y reconversión laboral.</li>
+      <li><strong>Sostenibilidad financiera no acreditada:</strong> el principal punto de tensión en el debate legislativo es la ausencia de proyecciones financieras verificables que demuestren la viabilidad del modelo sin incurrir en déficit estructural.</li>
+      <li><strong>Riesgo de politización en la asignación de recursos:</strong> la centralización del financiamiento en el Estado y la adscripción territorial por municipio podrían generar condiciones favorables para la asignación de recursos con criterios distintos a las necesidades técnicas en salud.</li>
+      <li><strong>Eliminación de incentivos de calidad por competencia:</strong> la asignación territorial impide que los usuarios elijan su asegurador, lo que reduce los incentivos que, aunque limitados, actualmente existen para que las EPS compitan por mejorar la calidad de sus servicios.</li>
+      <li><strong>Acceso a medicamentos y tecnologías de alto costo:</strong> sin entidades que negocien colectivamente, el acceso a tratamientos de alto costo quedaría sujeto a la capacidad de negociación del Estado, que históricamente ha presentado menores niveles de agilidad en este proceso.</li>
+    </ul>
+
+    <div class="alerta">
+      <p class="alerta-titulo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Posiciones del sector académico y de la sociedad civil
+      </p>
+      <p>
+        Investigadores de la Universidad de los Andes señalaron que, sin sistemas de información robustos en el nivel de la prestación, el modelo propuesto podría reproducir las dificultades de acceso existentes, pero sin los mecanismos de gestión del riesgo que actualmente ofrece el esquema de aseguramiento.
+      </p>
+      <p>
+        La Asociación Pacientes Colombia, que agrupa a 198 organizaciones, manifestó que la transición hacia un modelo sin aseguramiento individual podría afectar el acceso a servicios de más de 16 millones de personas con enfermedades crónicas de alto costo, quienes dependen de la gestión activa de sus EPS para garantizar la continuidad de sus tratamientos.
+      </p>
+    </div>
+
+    <div class="cita">
+      <p>"Si bien las dos propuestas tienen diferencias reales, ambos proyectos contienen el mismo pecado, que es la insostenibilidad del sistema de salud."</p>
+      <cite>— David Bardey, Razón Pública, octubre 2025</cite>
+    </div>
+
+    <p>
+      Desde la perspectiva desarrollada en esta revisión, consideramos que el principal reto no consiste en elegir entre mantener o eliminar el aseguramiento, sino en fortalecer sus mecanismos, mejorar la gestión del riesgo y corregir las fallas de implementación, sin sacrificar los avances alcanzados en cobertura y acceso durante las últimas tres décadas.
+    </p>
+  </section>
+
+  <!-- REFLEXIÓN DESDE LA PRÁCTICA -->
+  <div class="caja-concepto naranja" style="margin-top:48px;">
+    <h3>Una reflexión desde nuestra formación</h3>
+    <p>
+      Como profesionales del área de la salud, durante nuestra formación hemos podido observar que muchas de las dificultades del sistema no se relacionan únicamente con la financiación, sino también con los procesos administrativos y con la coordinación entre los diferentes actores. Las barreras para la autorización de servicios, la fragmentación entre niveles de atención y la escasa articulación entre EPS e IPS son situaciones que afectan directamente la experiencia del paciente, con independencia del régimen al que pertenezca. Esta perspectiva nos lleva a considerar que cualquier proceso de reforma debería orientarse a fortalecer la atención al paciente como eje central, sin perder los avances alcanzados en cobertura a lo largo de los últimos años.
+    </p>
+  </div>
+
+  <!-- CONCLUSIÓN -->
+  <div class="conclusion" id="conclusion" style="margin-top:48px;">
+    <h2>Consideraciones finales</h2>
+    <p>
+      El sistema de salud colombiano ha permitido ampliar significativamente la cobertura y garantizar el acceso de la mayor parte de la población a un conjunto definido de servicios, lo que representa un logro relevante en el contexto latinoamericano. La Ley 100 de 1993, con sus limitaciones, sentó las bases para una transformación que benefició especialmente a los sectores de menores ingresos.
+    </p>
+    <p>
+      Sin embargo, persisten dificultades estructurales relacionadas con la sostenibilidad financiera del sistema, la oportunidad en la prestación de los servicios, la gestión de los recursos por parte de algunas EPS y las brechas de equidad entre regímenes y territorios. Estos aspectos son ampliamente reconocidos por los diferentes actores del sector y constituyen el fundamento de los debates sobre reforma que se llevan a cabo actualmente.
+    </p>
+    <p>
+      En ese contexto, cualquier proceso de transformación del sistema debería partir de un diagnóstico técnico riguroso, fortalecer los aspectos que han demostrado resultados positivos y corregir las debilidades identificadas, procurando que las decisiones se fundamenten en evidencia y en las necesidades reales de la población. La cobertura alcanzada es un punto de partida que no debería ponerse en riesgo en el proceso de reforma.
+    </p>
+  </div>
+
+  <!-- AUTORES -->
+  <div class="autores">
+    <p class="autores-titulo">Autoras</p>
+    <div class="autores-grid">
+      <div class="autor-chip">
+        <div class="autor-avatar">MH</div>
+        <span class="autor-nombre">Meggie Herron Cardona</span>
+      </div>
+      <div class="autor-chip">
+        <div class="autor-avatar">DV</div>
+        <span class="autor-nombre">Daniela Valencia Quintero</span>
+      </div>
+      <div class="autor-chip">
+        <div class="autor-avatar">DÁ</div>
+        <span class="autor-nombre">Daniela Ángel Villalba</span>
+      </div>
+      <div class="autor-chip">
+        <div class="autor-avatar">MJ</div>
+        <span class="autor-nombre">María José Molina Guerra</span>
+      </div>
+    </div>
+    <p class="autor-institucion">Gerencia de la Salud Virtual · Fundación Universitaria de Ciencias de la Salud (FUCS) · Bogotá, Colombia · 2026</p>
+  </div>
+
+  <!-- BIBLIOGRAFÍA -->
+  <div class="autores" id="bibliografia" style="margin-top:48px; border-top:1px solid var(--borde); padding-top:48px;">
+    <p class="autores-titulo">Bibliografía</p>
+    <p style="font-size:0.82rem;color:var(--gris-m);margin-bottom:24px;font-style:italic;">Referencias en formato APA 7.ª edición</p>
+    <ol style="padding-left:20px;display:flex;flex-direction:column;gap:18px;">
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Congreso de Colombia. (1993). <em>Ley 100 de 1993: Por la cual se crea el sistema de seguridad social integral y se dictan otras disposiciones.</em> Diario Oficial N.° 41.148. <a href="https://www.minsalud.gov.co/Normatividad_Nuevo/LEY%200100%20DE%201993.pdf" target="_blank" style="color:var(--verde);word-break:break-all;">https://www.minsalud.gov.co/Normatividad_Nuevo/LEY%200100%20DE%201993.pdf</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Ministerio de Salud y Protección Social. (2023). <em>Boletín de aseguramiento en salud: Estadísticas de afiliación al SGSSS.</em> Oficina de Estadística y Análisis. <a href="https://www.minsalud.gov.co/Proteccion-Social/Paginas/cifras-aseguramiento-salud.aspx" target="_blank" style="color:var(--verde);word-break:break-all;">https://www.minsalud.gov.co/proteccionsocial/Paginas/cifras-aseguramiento-salud.aspx</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Ministerio de Salud y Protección Social. (2013). <em>Resolución 5521 de 2013: Por la cual se define, aclara y actualiza integralmente el Plan de Beneficios en Salud con cargo a la Unidad de Pago por Capitación (UPC).</em> <a href="https://www.minsalud.gov.co/Normatividad_Nuevo/Resoluci%C3%B3n%205521%20de%202013.pdf" target="_blank" style="color:var(--verde);word-break:break-all;">https://www.minsalud.gov.co/Normatividad_Nuevo/Resolución 5521 de 2013.pdf</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Administradora de los Recursos del Sistema General de Seguridad Social en Salud (ADRES). (2024). <em>Informe de gestión 2023: Flujo y administración de los recursos del SGSSS.</em> <a href="https://www.adres.gov.co/control/informes-de-gestion-evaluacion-y-auditoria/Informes%20de%20Gestion/Informe%20de%20Gesti%C3%B3n%20Institucional%202023.pdf" target="_blank" style="color:var(--verde);">https://www.adres.gov.co/control/informes-de-gestion-evaluacion-y-auditoria/Informe de Gestión Institucional 2023.pdf</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Congreso de la República de Colombia. (2024). <em>Proyecto de Ley 312 de 2024 Cámara: Por medio de la cual se transforma el Sistema de Salud en Colombia y se dictan otras disposiciones.</em> Gaceta del Congreso N.° 1412.
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Restrepo-Zea, J. H. (2022, julio 7). Así ha evolucionado el sistema de salud en Colombia. <em>Periódico UNAL.</em> Universidad Nacional de Colombia. <a href="https://periodico.unal.edu.co/articulos/asi-ha-evolucionado-el-sistema-de-salud-en-colombia/" target="_blank" style="color:var(--verde);word-break:break-all;">https://periodico.unal.edu.co/articulos/asi-ha-evolucionado-el-sistema-de-salud-en-colombia/</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Guerrero, R., Gallego, A. I., Becerril-Montekio, V., & Vásquez, J. (2011). Sistema de salud de Colombia. <em>Salud Pública de México, 53</em>(Supl. 2), S144–S155. <a href="https://www.scielosp.org/pdf/spm/2011.v53suppl2/s144-s155" target="_blank" style="color:var(--verde);word-break:break-all;">https://www.scielosp.org/pdf/spm/2011.v53suppl2/s144-s155</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Bardey, D. (2025, octubre 5). Reforma a la salud en Colombia: entre la propuesta del Gobierno y la ponencia alternativa. <em>Razón Pública.</em> <a href="https://razonpublica.com/reforma-la-salud-colombia-la-propuesta-del-gobierno-la-ponencia-alternativa/" target="_blank" style="color:var(--verde);word-break:break-all;">https://razonpublica.com/reforma-la-salud-colombia-la-propuesta-del-gobierno-la-ponencia-alternativa/</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Organización Panamericana de la Salud (OPS/OMS). (2025). <em>Perfil de país Colombia 2025: indicadores de salud.</em> Salud en las Américas. <a href="https://hia.paho.org/es/perfiles-de-pais/colombia" target="_blank" style="color:var(--verde);word-break:break-all;">https://hia.paho.org/es/perfiles-de-pais/colombia</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Organización Panamericana de la Salud (OPS/OMS). (2025). <em>Perfil de país: Colombia.</em> Salud en las Américas. <a href="https://hia.paho.org/es/perfiles-de-pais/colombia" target="_blank" style="color:var(--verde);word-break:break-all;">https://hia.paho.org/es/perfiles-de-pais/colombia</a>
+      </li>
+      <li style="font-size:0.9rem;line-height:1.75;color:#2a2a2a;">
+        Departamento Nacional de Planeación (DNP). (2022). <em>Bases del Plan Nacional de Desarrollo 2022–2026: Colombia potencia mundial de la vida.</em> DNP. <a href="https://colaboracion.dnp.gov.co/CDT/portalDNP/PND-2023/2023-03-17-bases-plan-nacional-desarrollo-web.pdf" target="_blank" style="color:var(--verde);word-break:break-all;">https://colaboracion.dnp.gov.co/CDT/portalDNP/PND-2023/2023-03-17-bases-plan-nacional-desarrollo-web.pdf</a>
+      </li>
+    </ol>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Salud Colombia Hoy</strong> · Blog académico</p>
+  <p>Actividad Semana 5 · Sistema General de Seguridad Social en Salud</p>
+  <p style="margin-top:8px">Gerencia de la Salud Virtual · FUCS · 2026</p>
+</footer>
+
+</body>
+</html>
